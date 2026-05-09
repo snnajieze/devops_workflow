@@ -41,7 +41,7 @@ Developer (git push)
   (Docker Image Registry)
         │
         ▼
-  Amazon EKS Cluster — PROD_ENGIS
+  Amazon EKS Cluster — DEMO_CLUSTER
   ┌──────────────────────────────┐
   │  Namespace: solomon-ns       │
   │  Deployment: 2 replicas      │
@@ -61,7 +61,7 @@ Developer (git push)
 |------------------|----------------------|----------------------------------------------|
 | Networking       | AWS VPC              | Isolated network with 2 public subnets       |
 | Container Registry | Amazon ECR         | Stores versioned Docker images               |
-| Orchestration    | Amazon EKS (K8s 1.29)| Runs and manages application containers      |
+| Orchestration    | Amazon EKS (K8s 1.35)| Runs and manages application containers      |
 | CI/CD Server     | Jenkins on EC2       | Automates build, test, and deploy            |
 | Monitoring       | AWS CloudWatch       | Logs from EKS control plane and nodes        |
 | IaC              | Terraform >= 1.3     | Provisions all AWS infrastructure            |
@@ -101,7 +101,7 @@ Ensure the following are installed and configured on your **local machine** befo
 |-------------|-------------|----------------------------------|
 | Terraform   | >= 1.3.0    | Provision AWS infrastructure     |
 | AWS CLI     | >= 2.0      | Authenticate with AWS            |
-| kubectl     | >= 1.29     | Interact with EKS cluster        |
+| kubectl     | >= 1.35     | Interact with EKS cluster        |
 | Git         | Any         | Push code to GitHub              |
 
 You also need:
@@ -151,7 +151,7 @@ After apply completes, note the outputs:
 ```
 jenkins_url         = "http://<PUBLIC_IP>:8080"
 ecr_repository_url  = "<ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/solomon-app"
-eks_cluster_name    = "PROD_ENGIS"
+eks_cluster_name    = "DEMO_CLUSTER"
 aws_account_id      = "<YOUR_ACCOUNT_ID>"
 ```
 
@@ -195,7 +195,7 @@ On the Jenkins EC2, update the EKS `aws-auth` ConfigMap to allow the Jenkins IAM
 
 ```bash
 # On your local machine (where kubectl is configured)
-aws eks update-kubeconfig --region us-east-1 --name PROD_ENGIS
+aws eks update-kubeconfig --region us-east-1 --name DEMO_CLUSTER
 
 kubectl edit configmap aws-auth -n kube-system
 ```
@@ -260,7 +260,7 @@ kubectl set image deployment/solomon-app \
 ### EKS Control Plane Logs
 Enabled via Terraform — logs for `api`, `audit`, `authenticator`, `controllerManager`, and `scheduler` are streamed to **AWS CloudWatch** under:
 ```
-/aws/eks/PROD_ENGIS/cluster
+/aws/eks/DEMO_CLUSTER/cluster
 ```
 
 ### Application Logs

@@ -1,11 +1,21 @@
-# Fetch the latest Amazon Linux 2 AMI
+# Fetch the latest Amazon Linux 2023 AMI (free tier eligible)
 data "aws_ami" "amazon_linux_2" {
   most_recent = true
   owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values = ["al2023-ami-*-x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
   }
 }
 
@@ -103,26 +113,31 @@ resource "aws_instance" "jenkins" {
   iam_instance_profile   = aws_iam_instance_profile.jenkins_profile.name
   key_name               = var.jenkins_key_name
 
+  root_block_device {
+    volume_size           = 20
+    volume_type           = "gp3"
+    delete_on_termination = true
+  }
+
   user_data = <<-EOF
     #!/bin/bash
     set -e
 
     # Update system
-    yum update -y
+    dnf update -y
 
     # Install Java 17 (required for Jenkins)
-    amazon-linux-extras enable corretto17
-    yum install -y java-17-amazon-corretto
+    dnf install -y java-17-amazon-corretto
 
     # Install Jenkins
     wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
     rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-    yum install -y jenkins
+    dnf install -y jenkins
     systemctl enable jenkins
     systemctl start jenkins
 
     # Install Docker
-    yum install -y docker
+    dnf install -y docker
     systemctl enable docker
     systemctl start docker
     usermod -aG docker jenkins
