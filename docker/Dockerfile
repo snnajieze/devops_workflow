@@ -5,7 +5,8 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy our app into the Nginx html directory
-COPY ../app/index.html /usr/share/nginx/html/index.html
+# Build context is the repo root, so path is relative to root
+COPY app/index.html /usr/share/nginx/html/index.html
 
 # Expose port 80
 EXPOSE 80

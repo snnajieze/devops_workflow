@@ -36,6 +36,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building Docker image: ${IMAGE_FULL_NAME}"
+                // Build context is repo root so Dockerfile can access app/index.html
                 sh """
                     docker build \
                         -f docker/Dockerfile \
@@ -53,6 +54,9 @@ pipeline {
             steps {
                 echo "Running container smoke test..."
                 sh """
+                    # Kill any leftover test container from a previous failed build
+                    docker rm -f test-container 2>/dev/null || true
+
                     # Start the container in detached mode
                     docker run -d --name test-container -p 8081:80 ${IMAGE_FULL_NAME}
 
@@ -93,7 +97,7 @@ pipeline {
             steps {
                 echo "Authenticating with ECR and pushing image..."
                 sh """
-                    # Authenticate Docker to ECR
+                    # Authenticate Docker to ECR using IAM role (no stored credentials needed)
                     aws ecr get-login-password --region ${AWS_REGION} | \
                         docker login --username AWS --password-stdin ${ECR_REGISTRY}
 
@@ -121,12 +125,16 @@ pipeline {
                     # Apply namespace (idempotent - safe to run every time)
                     kubectl apply -f k8s/namespace.yaml --validate=false
 
-                    # Substitute image placeholder with the real image URL and apply
-                    sed -i 's|ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/solomon-app:IMAGE_TAG|${IMAGE_FULL_NAME}|g' k8s/deployment.yaml
-                    kubectl apply -f k8s/deployment.yaml --validate=false
+                    # Generate deployment manifest with real image URL substituted in
+                    # Using envsubst avoids modifying the tracked deployment.yaml file
+                    export DEPLOY_IMAGE="${IMAGE_FULL_NAME}"
+                    cat k8s/deployment.yaml | \
+                        sed "s|ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/solomon-app:IMAGE_TAG|\$DEPLOY_IMAGE|g" | \
+                        kubectl apply -f - --validate=false
+
                     kubectl apply -f k8s/service.yaml --validate=false
 
-                    # Wait for rollout to complete
+                    # Wait for rollout to complete (fails pipeline if pods don't come up)
                     kubectl rollout status deployment/solomon-app \
                         -n ${K8S_NAMESPACE} \
                         --timeout=120s
@@ -158,7 +166,7 @@ pipeline {
             echo "Pipeline completed successfully. Build #${BUILD_NUMBER} deployed."
         }
         failure {
-            echo "Pipeline failed at stage. Check logs above for details."
+            echo "Pipeline FAILED. Check the stage logs above for details."
         }
     }
 }

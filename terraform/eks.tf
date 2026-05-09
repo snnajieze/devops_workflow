@@ -46,11 +46,34 @@ resource "aws_iam_role_policy_attachment" "eks_ecr_read_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
+resource "aws_iam_role_policy_attachment" "eks_cloudwatch_policy" {
+  role       = aws_iam_role.eks_node_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
+
 # Security Group for EKS Cluster
 resource "aws_security_group" "eks_cluster_sg" {
   name        = "${var.project_name}-eks-cluster-sg"
-  description = "Security group for EKS control plane"
+  description = "Security group for EKS control plane and worker nodes"
   vpc_id      = aws_vpc.main.id
+
+  # Allow HTTP traffic from ELB to nodes
+  ingress {
+    description = "HTTP from ELB"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow NodePort range for LoadBalancer routing
+  ingress {
+    description = "NodePort range for LoadBalancer"
+    from_port   = 30000
+    to_port     = 32767
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
@@ -107,5 +130,37 @@ resource "aws_eks_node_group" "main" {
     aws_iam_role_policy_attachment.eks_worker_node_policy,
     aws_iam_role_policy_attachment.eks_cni_policy,
     aws_iam_role_policy_attachment.eks_ecr_read_policy,
+    aws_iam_role_policy_attachment.eks_cloudwatch_policy,
   ]
+}
+
+# CloudWatch Observability Addon — ships pod logs and metrics to CloudWatch
+resource "aws_eks_addon" "cloudwatch_observability" {
+  cluster_name                = aws_eks_cluster.main.name
+  addon_name                  = "amazon-cloudwatch-observability"
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
+  depends_on = [
+    aws_eks_node_group.main
+  ]
+}
+
+# ── Automatically grant Jenkins IAM role access to EKS ──
+# This replaces the manual kubectl patch step we had to do during setup.
+# It patches the aws-auth ConfigMap so Jenkins can deploy to the cluster
+# without any manual intervention after terraform apply.
+resource "null_resource" "eks_aws_auth" {
+  depends_on = [
+    aws_eks_node_group.main,
+    aws_iam_role.jenkins_role
+  ]
+
+  provisioner "local-exec" {
+    command     = <<-EOT
+      aws eks update-kubeconfig --region ${var.aws_region} --name ${var.eks_cluster_name}
+      kubectl patch configmap aws-auth -n kube-system --patch "{\"data\":{\"mapRoles\":\"- rolearn: ${aws_iam_role.eks_node_role.arn}\n  username: system:node:{{EC2PrivateDNSName}}\n  groups:\n  - system:bootstrappers\n  - system:nodes\n- rolearn: ${aws_iam_role.jenkins_role.arn}\n  username: jenkins\n  groups:\n  - system:masters\n\"}}"
+    EOT
+    interpreter = ["bash", "-c"]
+  }
 }

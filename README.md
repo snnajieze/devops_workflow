@@ -263,14 +263,24 @@ Enabled via Terraform — logs for `api`, `audit`, `authenticator`, `controllerM
 /aws/eks/DEMO_CLUSTER/cluster
 ```
 
-### Application Logs
-View live pod logs:
+### Application & Pod Logs (Container Insights)
+The `amazon-cloudwatch-observability` EKS addon is provisioned via Terraform. It deploys a CloudWatch agent DaemonSet on every node and ships pod logs and performance metrics to CloudWatch under:
+```
+/aws/containerinsights/DEMO_CLUSTER/application
+/aws/containerinsights/DEMO_CLUSTER/performance
+/aws/containerinsights/DEMO_CLUSTER/host
+```
+
+### Accessing CloudWatch
+1. Go to **AWS Console → CloudWatch → Log groups**
+2. Filter by `/aws/eks/DEMO_CLUSTER` for control plane logs
+3. Filter by `/aws/containerinsights/DEMO_CLUSTER` for pod/application logs
+
+### Live Pod Logs (kubectl)
+View live pod logs directly:
 ```bash
 kubectl logs -l app=solomon-app -n solomon-ns --follow
 ```
-
-### CloudWatch Container Insights (optional enhancement)
-Can be enabled on the EKS cluster to get CPU, memory, and network metrics per pod in CloudWatch dashboards.
 
 ---
 
@@ -316,7 +326,6 @@ Each build produces a uniquely tagged image. This makes deployments traceable an
 | No GitHub webhook trigger               | Configure Jenkins webhook for automatic pipeline trigger on push   |
 | Single region deployment                | Add multi-region or multi-AZ failover                              |
 | No Horizontal Pod Autoscaler            | Add HPA based on CPU/memory metrics                                |
-| CloudWatch basic logging only           | Enable Container Insights for full pod-level metrics               |
 | No secrets management                   | Use AWS Secrets Manager or Kubernetes Secrets for sensitive config |
 
 ---
