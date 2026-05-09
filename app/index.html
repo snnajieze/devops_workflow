@@ -1,45 +1,484 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solomon App</title>
+  <title>Solomon Nnajieze | AI Automation Specialist, Cloud Engineer, Software Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f4f8;
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
     }
 
-    .card {
-      text-align: center;
-      background: white;
-      padding: 40px 60px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
     }
 
-    h1 {
-      color: #2d6a4f;
+    ::-webkit-scrollbar-thumb {
+      background: #22d3ee;
+      border-radius: 3px;
     }
 
-    p {
-      color: #555;
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #22d3ee, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Glow effect */
+    .glow {
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+    }
+
+    /* Timeline line */
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 24px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #22d3ee, transparent);
     }
   </style>
 </head>
 
-<body>
-  <div class="card">
-    <h1>Hello from Solomon's App!</h1>
-    <p>Deployed on Kubernetes cluster <strong>DEMO_CLUSTER</strong></p>
-    <p>Namespace: <strong>solomon-ns</strong></p>
-  </div>
+<body class="bg-slate-950 text-slate-300 font-sans antialiased">
+
+  <!-- ── Navigation ── -->
+  <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <span class="text-cyan-400 font-bold text-lg tracking-tight">SN<span class="text-slate-400">.</span></span>
+      <div class="hidden md:flex items-center gap-8 text-sm text-slate-400">
+        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+        <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div class="max-w-3xl text-center">
+      <div
+        class="inline-flex items-center gap-2 bg-slate-800/60 border border-slate-700 rounded-full px-4 py-1.5 text-xs text-cyan-400 mb-8">
+        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        Open to remote opportunities
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
+        Solomon <span class="gradient-text">Nnajieze</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-400 mb-6 font-light">
+        AI Automation Specialist · Cloud Engineer · Software Engineer
+      </p>
+      <p class="text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+        Building reliable, scalable systems with AI automation, cloud infrastructure, and DevOps best practices.
+        7+ years of experience helping teams move faster and operate smarter.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#projects"
+          class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition-colors">
+          View Projects
+        </a>
+        <a href="#contact"
+          class="border border-slate-600 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Get In Touch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-white mb-2">About Me</h2>
+      <div class="w-12 h-1 bg-cyan-400 rounded mb-10"></div>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 glow space-y-4 text-slate-400 leading-relaxed">
+        <p>
+          I'm a Software Engineer specializing in <span class="text-cyan-400 font-medium">AI Automation, Cloud
+            Engineering, and DevOps</span>,
+          with 7+ years of experience building, deploying, and scaling production-grade systems.
+          My background in PHP/Laravel evolved into full ownership of cloud infrastructure, automation workflows, and
+          system reliability.
+        </p>
+        <p>
+          I design and operate scalable systems using <span class="text-slate-200">AWS, DigitalOcean, Docker, CI/CD
+            (Jenkins, GitHub Actions), Linux, and Nginx</span>.
+          I build automation workflows (n8n, APIs, AI-assisted processes) that eliminate repetitive tasks,
+          improve operational efficiency, and reduce infrastructure costs for businesses.
+        </p>
+        <p>
+          My experience spans backend engineering, cloud deployments, and production reliability across teams at
+          <span class="text-slate-200">SAMBA-DATA R&D, SwitchCoins Global, BFA Digital Tech</span>, and multiple
+          startups.
+          I've built REST APIs, optimized databases, automated deployments, and maintained high-availability systems
+          used in real-world environments.
+        </p>
+        <p>
+          I focus on <span class="text-cyan-400 font-medium">automation, scalability, security, and cost
+            optimization</span> — helping teams ship faster
+          while keeping systems stable and predictable. I also contribute as a technical writer, documenting CI/CD,
+          cloud workflows, and practical engineering solutions.
+        </p>
+        <p>
+          Currently deepening my expertise in AI-driven automation, cloud-native systems, and platform engineering,
+          and I'm open to remote opportunities where I can help build efficient, intelligent, and high-impact systems.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Skills ── -->
+  <section id="skills" class="py-24 px-6 bg-slate-900/40">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-white mb-2">Skills & Expertise</h2>
+      <div class="w-12 h-1 bg-cyan-400 rounded mb-10"></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- DevOps & Cloud -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors glow">
+          <div class="text-2xl mb-3">☁️</div>
+          <h3 class="text-white font-semibold mb-4">DevOps & Cloud Infrastructure</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>▸ AWS (EC2, RDS, S3, CloudFront)</li>
+            <li>▸ DigitalOcean & App Platform</li>
+            <li>▸ Docker & Container Orchestration</li>
+            <li>▸ CI/CD with GitHub Actions</li>
+            <li>▸ Linux (Nginx, Apache, systemd)</li>
+            <li>▸ Monitoring & Observability</li>
+            <li>▸ Infrastructure as Code</li>
+          </ul>
+        </div>
+
+        <!-- AI Automation -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors glow">
+          <div class="text-2xl mb-3">🤖</div>
+          <h3 class="text-white font-semibold mb-4">AI Automation</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>▸ n8n — Open-source workflow automation</li>
+            <li>▸ Zapier — No-code automation platform</li>
+            <li>▸ Make — Advanced visual automation</li>
+            <li>▸ ChatGPT API — AI language model integration</li>
+            <li>▸ Claude API — Conversational AI assistant</li>
+            <li>▸ Airtable — Hybrid database-spreadsheet</li>
+            <li>▸ Voiceflow — Conversational AI design</li>
+            <li>▸ ManyChat — Marketing chatbot platform</li>
+            <li>▸ LangChain — AI framework for LLMs</li>
+          </ul>
+        </div>
+
+        <!-- Backend & Web -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors glow">
+          <div class="text-2xl mb-3">⚙️</div>
+          <h3 class="text-white font-semibold mb-4">Backend & Web Development</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>▸ PHP 8+ & Laravel (latest stable)</li>
+            <li>▸ REST APIs & API Design</li>
+            <li>▸ MySQL, PostgreSQL</li>
+            <li>▸ Blade Templates & Livewire</li>
+            <li>▸ Tailwind CSS & Frontend Tooling</li>
+            <li>▸ Git & Version Control</li>
+            <li>▸ Performance Optimization</li>
+          </ul>
+        </div>
+
+        <!-- Professional Practices -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors glow">
+          <div class="text-2xl mb-3">🎯</div>
+          <h3 class="text-white font-semibold mb-4">Professional Practices</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>▸ Automation-first mindset</li>
+            <li>▸ Clear documentation & knowledge sharing</li>
+            <li>▸ Remote collaboration & communication</li>
+            <li>▸ Code review & mentorship</li>
+            <li>▸ Problem-solving & troubleshooting</li>
+            <li>▸ Technical writing</li>
+          </ul>
+        </div>
+
+        <!-- Specializations -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors glow">
+          <div class="text-2xl mb-3">🚀</div>
+          <h3 class="text-white font-semibold mb-4">Specializations</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>▸ Full-stack web applications</li>
+            <li>▸ Production deployments & DevOps</li>
+            <li>▸ System reliability & scaling</li>
+            <li>▸ SaaS platform architecture</li>
+            <li>▸ Real-time systems & APIs</li>
+            <li>▸ Cloud cost optimization</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ── -->
+  <section id="projects" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-white mb-2">Featured Projects</h2>
+      <div class="w-12 h-1 bg-cyan-400 rounded mb-10"></div>
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Project 1 -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors flex flex-col gap-4">
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-1">Custom AI Customer Service & Sales Assistant</h3>
+            <p class="text-cyan-400 text-sm">AI-powered lead capture automation for businesses</p>
+          </div>
+          <div class="space-y-3 text-sm text-slate-400">
+            <p><span class="text-slate-300 font-medium">Problem:</span> Sales teams spending hours manually answering
+              questions, qualifying leads, and following up — taking time away from closing deals.</p>
+            <p><span class="text-slate-300 font-medium">Solution:</span> AI Chat Agent that engages 24/7, automatically
+              qualifies leads, logs to Google Sheets, remembers conversation context, and schedules meetings
+              automatically.</p>
+            <p><span class="text-slate-300 font-medium">Impact:</span> Team saves hours of manual data entry, never
+              misses a lead, and focuses on high-value conversations.</p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">AI Automation</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">Chat Agent</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">Lead Qualification</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">Google Sheets</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors flex flex-col gap-4">
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-1">c4csignals.com</h3>
+            <p class="text-cyan-400 text-sm">Personally built trading signals platform</p>
+          </div>
+          <div class="space-y-3 text-sm text-slate-400">
+            <p><span class="text-slate-300 font-medium">Problem:</span> Need for a reliable, real-time trading signal
+              delivery platform with high availability requirements.</p>
+            <p><span class="text-slate-300 font-medium">Solution:</span> Built full-stack Laravel application with
+              real-time signal processing, multiple payment integrations, and cloud deployment on DigitalOcean.</p>
+            <p><span class="text-slate-300 font-medium">Impact:</span> Production system serving thousands of users with
+              99.9% uptime, handling high-frequency data processing.</p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">Laravel</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">PostgreSQL</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">DigitalOcean</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">Real-time APIs</span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors flex flex-col gap-4">
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-1">XWhyMobile</h3>
+            <p class="text-cyan-400 text-sm">Android app for local data & airtime purchases</p>
+          </div>
+          <div class="space-y-3 text-sm text-slate-400">
+            <p><span class="text-slate-300 font-medium">Problem:</span> Users needed a seamless way to purchase mobile
+              data and airtime with local payment methods.</p>
+            <p><span class="text-slate-300 font-medium">Solution:</span> Architected backend REST APIs with PHP and
+              MySQL, integrated with Android app using Java and jQueryMobile UI. Handled payment processing and
+              transaction reconciliation.</p>
+            <p><span class="text-slate-300 font-medium">Impact:</span> Learned mobile app integration, payment systems,
+              and user experience across platforms.</p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">PHP</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">MySQL</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">Android</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">REST APIs</span>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors flex flex-col gap-4">
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-1">SwitchCoins Global — Platform Infrastructure</h3>
+            <p class="text-cyan-400 text-sm">High-availability cryptocurrency exchange platform</p>
+          </div>
+          <div class="space-y-3 text-sm text-slate-400">
+            <p><span class="text-slate-300 font-medium">Problem:</span> Needed reliable infrastructure for production
+              crypto trading platform with strict uptime requirements.</p>
+            <p><span class="text-slate-300 font-medium">Solution:</span> Implemented CI/CD pipelines using GitHub
+              Actions, automated server deployments on AWS and DigitalOcean, set up monitoring and alerting, managed
+              database backups and disaster recovery.</p>
+            <p><span class="text-slate-300 font-medium">Impact:</span> Reduced deployment time by 60%, improved system
+              reliability to 99.95% uptime, enabled rapid feature releases.</p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">AWS</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">DevOps</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">CI/CD</span>
+            <span class="bg-slate-800 text-cyan-400 text-xs px-3 py-1 rounded-full">Docker</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Experience ── -->
+  <section id="experience" class="py-24 px-6 bg-slate-900/40">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-white mb-2">Experience Timeline</h2>
+      <div class="w-12 h-1 bg-cyan-400 rounded mb-10"></div>
+      <div class="space-y-8">
+
+        <!-- Job 1 -->
+        <div class="relative pl-8 timeline-line">
+          <div class="absolute left-0 top-1.5 w-4 h-4 bg-cyan-400 rounded-full border-2 border-slate-950"></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-semibold text-lg">DevOps Engineer</h3>
+                <p class="text-cyan-400 text-sm">SAMBA-DATA R&D</p>
+              </div>
+              <span class="text-slate-500 text-sm bg-slate-800 px-3 py-1 rounded-full">2025 – Present</span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-400">
+              <li>• Implemented CI/CD pipelines to automate testing and deployment processes, improving delivery speed
+                and reliability</li>
+              <li>• Deployed and managed applications on AWS cloud infrastructure, ensuring high availability and
+                security</li>
+              <li>• Containerized applications using Docker for consistent development and production environments</li>
+              <li>• Monitored system performance, optimized server resources, and resolved production issues proactively
+              </li>
+              <li>• Collaborated with cross-functional teams to deliver business-focused, production-ready solutions
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="relative pl-8 timeline-line">
+          <div class="absolute left-0 top-1.5 w-4 h-4 bg-indigo-400 rounded-full border-2 border-slate-950"></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-semibold text-lg">Full Stack Developer & DevOps Support</h3>
+                <p class="text-cyan-400 text-sm">SwitchCoins Global Ltd.</p>
+              </div>
+              <span class="text-slate-500 text-sm bg-slate-800 px-3 py-1 rounded-full">2021 – 2022</span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-400">
+              <li>• Developed and maintained high-availability cryptocurrency exchange platform</li>
+              <li>• Implemented CI/CD pipelines reducing deployment time by 60%</li>
+              <li>• Managed cloud infrastructure on AWS and DigitalOcean</li>
+              <li>• Set up monitoring, logging, and observability systems</li>
+              <li>• Mentored junior developers and conducted code reviews</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="relative pl-8 timeline-line">
+          <div class="absolute left-0 top-1.5 w-4 h-4 bg-indigo-400 rounded-full border-2 border-slate-950"></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-semibold text-lg">Full Stack Developer & Technical Trainer</h3>
+                <p class="text-cyan-400 text-sm">BFA Digital Tech</p>
+              </div>
+              <span class="text-slate-500 text-sm bg-slate-800 px-3 py-1 rounded-full">2019 – 2021</span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-400">
+              <li>• Built multiple Laravel-based web applications from scratch</li>
+              <li>• Designed and implemented REST APIs</li>
+              <li>• Trained junior developers in PHP, Laravel, and web development best practices</li>
+              <li>• Deployed applications to production servers</li>
+              <li>• Wrote technical documentation and guides</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 4 -->
+        <div class="relative pl-8">
+          <div class="absolute left-0 top-1.5 w-4 h-4 bg-slate-500 rounded-full border-2 border-slate-950"></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition-colors">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-white font-semibold text-lg">Junior Web Developer & Network Admin</h3>
+                <p class="text-cyan-400 text-sm">Vision Data Techs</p>
+              </div>
+              <span class="text-slate-500 text-sm bg-slate-800 px-3 py-1 rounded-full">2015 – 2019</span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-400">
+              <li>• Developed PHP web applications</li>
+              <li>• Managed company network infrastructure</li>
+              <li>• Provided technical support and maintenance</li>
+              <li>• Learned foundational web development and system administration</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Technical Writing ── -->
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-white mb-2">Technical Writing & Communication</h2>
+      <div class="w-12 h-1 bg-cyan-400 rounded mb-10"></div>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 glow">
+        <p class="text-slate-400 leading-relaxed mb-6">
+          I believe great engineering requires clear communication. I write technical guides, blog articles,
+          and documentation to help others learn and solve problems faster.
+        </p>
+        <p class="text-slate-400 leading-relaxed">
+          Writing on
+          <span class="text-cyan-400 font-medium">Medium, Hashnode, and Dev.to</span> —
+          follow me for weekly posts on AI, Automation, DevOps, Laravel, and cloud infrastructure.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact" class="py-24 px-6 bg-slate-900/40">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-white mb-2">Let's Work Together</h2>
+      <div class="w-12 h-1 bg-cyan-400 rounded mb-6 mx-auto"></div>
+      <p class="text-slate-400 text-lg leading-relaxed mb-10">
+        I'm open to remote-first opportunities with any company that values reliability and scalability.
+        Let's build something reliable and scalable.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="mailto:snnajieze@gmail.com"
+          class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold px-8 py-3 rounded-lg transition-colors">
+          Send an Email
+        </a>
+        <a href="https://github.com/snnajieze" target="_blank" rel="noopener noreferrer"
+          class="border border-slate-600 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 font-semibold px-8 py-3 rounded-lg transition-colors">
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/snnajieze" target="_blank" rel="noopener noreferrer"
+          class="border border-slate-600 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 font-semibold px-8 py-3 rounded-lg transition-colors">
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="py-8 px-6 border-t border-slate-800 text-center text-slate-600 text-sm">
+    <p>© 2026 Solomon Nnajieze · Built with HTML & Tailwind CSS · Deployed on AWS EKS</p>
+  </footer>
+
 </body>
 
 </html>

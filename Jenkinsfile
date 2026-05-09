@@ -80,7 +80,7 @@ pipeline {
                     fi
 
                     # Assert content contains expected text
-                    if ! echo "\$CONTENT" | grep -q "Solomon"; then
+                    if ! echo "\$CONTENT" | grep -q "Solomon Nnajieze"; then
                         echo "FAILED: Expected content not found in response"
                         exit 1
                     fi
