@@ -8,12 +8,6 @@ terraform {
     }
   }
 
-  # Optional: uncomment to store state remotely in S3 (recommended for real projects)
-  # backend "s3" {
-  #   bucket = "your-terraform-state-bucket"
-  #   key    = "solomon-app/terraform.tfstate"
-  #   region = "us-east-1"
-  # }
 }
 
 provider "aws" {

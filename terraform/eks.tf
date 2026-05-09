@@ -147,9 +147,6 @@ resource "aws_eks_addon" "cloudwatch_observability" {
 }
 
 # ── Automatically grant Jenkins IAM role access to EKS ──
-# This replaces the manual kubectl patch step we had to do during setup.
-# It patches the aws-auth ConfigMap so Jenkins can deploy to the cluster
-# without any manual intervention after terraform apply.
 resource "null_resource" "eks_aws_auth" {
   depends_on = [
     aws_eks_node_group.main,
