@@ -101,3 +101,5 @@ override.tf.json
 # Kubernetes secrets
 *-secret.yaml
 *-secrets.yaml
+
+aws-auth-patch.yaml
