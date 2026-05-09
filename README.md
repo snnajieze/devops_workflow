@@ -1,6 +1,6 @@
 # Solomon App — Production-Ready Deployment on AWS EKS
 
-A simple static web application containerized with Docker and deployed to AWS EKS via a fully automated Jenkins CI/CD pipeline, with infrastructure provisioned using Terraform.
+A simple static web application containerized with Docker and deployed to AWS EKS via a fully automated Jenkins CI/CD pipeline, with infrastructure provisioned using Terraform...
 
 ---
 
