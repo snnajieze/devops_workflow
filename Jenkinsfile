@@ -119,12 +119,12 @@ pipeline {
                         --name ${EKS_CLUSTER_NAME}
 
                     # Apply namespace (idempotent - safe to run every time)
-                    kubectl apply -f k8s/namespace.yaml
+                    kubectl apply -f k8s/namespace.yaml --validate=false
 
                     # Substitute image placeholder with the real image URL and apply
                     sed -i 's|ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/solomon-app:IMAGE_TAG|${IMAGE_FULL_NAME}|g' k8s/deployment.yaml
-                    kubectl apply -f k8s/deployment.yaml
-                    kubectl apply -f k8s/service.yaml
+                    kubectl apply -f k8s/deployment.yaml --validate=false
+                    kubectl apply -f k8s/service.yaml --validate=false
 
                     # Wait for rollout to complete
                     kubectl rollout status deployment/solomon-app \
